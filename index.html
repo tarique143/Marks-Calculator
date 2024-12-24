@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 80px;
+            text-align: center;
+        }
+        .calculate-btn {
+            padding: 8px 15px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .calculate-btn:hover {
+            background-color: red;
+        }
+        .result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+        }
+        footer a {
+            color: #00bcd4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        footer .icons {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        footer .icons a {
+            margin: 0 8px;
+            color: white;
+        }
+        footer .icons a:hover {
+            color: #00bcd4;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        function calculate() {
+            let maxMarks = 0, obtainedMarks = 0;
+            for (let i = 1; i <= 10; i++) {
+                let maxInput = document.getElementById(`max${i}`).value;
+                let obtainedInput = document.getElementById(`obt${i}`).value;
+                maxMarks += parseFloat(maxInput || 0);
+                obtainedMarks += parseFloat(obtainedInput || 0);
+            }
+            document.getElementById("totalMax").innerText = maxMarks;
+            document.getElementById("totalObt").innerText = obtainedMarks;
+
+            let percent = (obtainedMarks / maxMarks) * 100 || 0;
+            document.getElementById("percentage").innerText = percent.toFixed(2) + "%";
+
+            let grade = "";
+            if (percent >= 90) grade = "Excellent (A+)";
+            else if (percent >= 80) grade = "Good (A)";
+            else if (percent >= 70) grade = "Above Average (B+)";
+            else if (percent >= 60) grade = "Average (B)";
+            else if (percent >= 50) grade = "Below Average (C+)";
+            else if (percent >= 40) grade = "Unsatisfactory (C)";
+            else grade = "Fail";
+
+            document.getElementById("grade").innerText = grade;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Marks Calculator</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Max Marks</th>
+                    <th>Obtained Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows for 10 subjects -->
+                <tr><td>Subject 1</td><td><input type="number" id="max1"></td><td><input type="number" id="obt1"></td></tr>
+                <tr><td>Subject 2</td><td><input type="number" id="max2"></td><td><input type="number" id="obt2"></td></tr>
+                <tr><td>Subject 3</td><td><input type="number" id="max3"></td><td><input type="number" id="obt3"></td></tr>
+                <tr><td>Subject 4</td><td><input type="number" id="max4"></td><td><input type="number" id="obt4"></td></tr>
+                <tr><td>Subject 5</td><td><input type="number" id="max5"></td><td><input type="number" id="obt5"></td></tr>
+                <tr><td>Subject 6</td><td><input type="number" id="max6"></td><td><input type="number" id="obt6"></td></tr>
+                <tr><td>Subject 7</td><td><input type="number" id="max7"></td><td><input type="number" id="obt7"></td></tr>
+                <tr><td>Subject 8</td><td><input type="number" id="max8"></td><td><input type="number" id="obt8"></td></tr>
+                <tr><td>Subject 9</td><td><input type="number" id="max9"></td><td><input type="number" id="obt9"></td></tr>
+                <tr><td>Subject 10</td><td><input type="number" id="max10"></td><td><input type="number" id="obt10"></td></tr>
+                <tr>
+                    <td>Total</td>
+                    <td id="totalMax">0</td>
+                    <td id="totalObt">0</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="calculate-btn" onclick="calculate()">Calculate</button>
+        <div class="result">
+            <p>Percentage: <span id="percentage">0.00%</span></p>
+            <p>Grade: <span id="grade">N/A</span></p>
+        </div>
+    </div>
+    <footer>
+        <p>A&T Devs Portfolio: <a href="https://a-t-devs.netlify.app" target="_blank">Visit Here</a></p>
+        <div class="icons">
+            <a href="tel:+916394733422" title="Call"><i class="fas fa-phone"></i></a>
+            <a href="mailto:tarique272192@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://a-t-devs.netlify.app" target="_blank" title="Website"><i class="fas fa-globe"></i></a>
+        </div>
+        <p>Contact: +91 6394733422 | <a href="mailto:tarique272192@gmail.com">tarique272192@gmail.com</a></p>
+    </footer>
+</body>
+</html>
